@@ -2,6 +2,16 @@
 
 Scheduled MySQL dump &amp; check.
 
+Features
+
+- [x] Creates GZip MySQL backups
+- [x] Optimizes/Repairs MySQL database
+- [x] Deletes old backups after a specified time
+- [x] Usable with cron, but also manually
+- [x] Environment file support
+- [ ] Global environment variables support
+- [x] Logging
+
 ## Installation
 
 ```bash
