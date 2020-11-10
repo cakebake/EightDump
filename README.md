@@ -18,11 +18,22 @@ BACKUP_PASSWORD=password
 BACKUP_HOST=localhost
 BACKUP_DATABASE=name
 BACKUP_DESTINATION_DIR=/var/www/html/project/backup
-BACKUP_KEEP_MINUTES=30
+BACKUP_KEEP_MINUTES=10080
 ```
 
 ## Usage
 
+CLI
+
 ```bash
-eightdump /path/to/.env
+./eightdump /path/to/.env
+```
+
+Cron
+
+```cron
+# every day 04h00
+0 4 * * * /path/to/eightdump /path/to/.env >/dev/null 2>&1
+# every 6h
+0 */6 * * * /path/to/eightdump /path/to/.env >/dev/null 2>&1
 ```
