@@ -10,6 +10,7 @@ Features
 - [x] Usable with cron, but also manually
 - [x] Environment file support
 - [ ] Global environment variables support
+- [ ] Supports MariaDb
 - [x] Logging
 
 ## Installation
@@ -30,6 +31,7 @@ Create or edit a configuration file with following variables.
 BACKUP_USER=user
 BACKUP_PASSWORD=password
 BACKUP_HOST=localhost
+BACKUP_PORT=3306
 BACKUP_DATABASE=name
 BACKUP_DESTINATION_DIR=/var/www/html/project/backup
 BACKUP_KEEP_MINUTES=10080
