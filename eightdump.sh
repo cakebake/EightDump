@@ -31,49 +31,49 @@ mkdir -p "$dest"
 find "$dest" -type f -not -path '*/\.*' -mmin "$keep" -delete
 
 if [ -x "$(command -v mysqldump)" ]; then
-	mysqldumpExe=mysqldump
+  mysqldumpExe=mysqldump
 elif [ -x "$(command -v /usr/bin/mysqldump)" ]; then
-	mysqldumpExe=/usr/bin/mysqldump
+  mysqldumpExe=/usr/bin/mysqldump
 elif [ -x "$(command -v /usr/local/mysql/bin/mysqldump)" ]; then
-	mysqldumpExe=/usr/local/mysql/bin/mysqldump
+  mysqldumpExe=/usr/local/mysql/bin/mysqldump
 elif [ -x "$(command -v /usr/local/mysql5/bin/mysqldump)" ]; then
-	mysqldumpExe=/usr/local/mysql5/bin/mysqldump
+  mysqldumpExe=/usr/local/mysql5/bin/mysqldump
 fi
 if [ ! -z "$mysqldumpExe" ]; then
-	echo "Found $mysqldumpExe executable."
-	if [ -x "$(command -v gzip)" ]; then
-		echo "Found gzip executable."
-		"$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" | gzip -9 > "$dump"
-	else
-		"$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" > "$dump"
-	fi
+  echo "Found $mysqldumpExe executable."
+  if [ -x "$(command -v gzip)" ]; then
+    echo "Found gzip executable."
+    "$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" | gzip -9 > "$dump"
+  else
+    "$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" > "$dump"
+  fi
 else
-	echo "Could not find mysqldump executable."
+  echo "Could not find mysqldump executable."
 fi
 
 if [ -x "$(command -v mysqlcheck)" ]; then
-	mysqlcheckExe=mysqlcheck
+  mysqlcheckExe=mysqlcheck
 elif [ -x "$(command -v /usr/bin/mysqlcheck)" ]; then
-	mysqlcheckExe=/usr/bin/mysqlcheck
+  mysqlcheckExe=/usr/bin/mysqlcheck
 elif [ -x "$(command -v /usr/local/mysql/bin/mysqlcheck)" ]; then
-	mysqlcheckExe=/usr/local/mysql/bin/mysqlcheck
+  mysqlcheckExe=/usr/local/mysql/bin/mysqlcheck
 elif [ -x "$(command -v /usr/local/mysql5/bin/mysqlcheck)" ]; then
-	mysqlcheckExe=/usr/local/mysql5/bin/mysqlcheck
+  mysqlcheckExe=/usr/local/mysql5/bin/mysqlcheck
 fi
 if [ ! -z "$mysqlcheckExe" ]; then
-	echo "Found $mysqlcheckExe executable."
-	"$mysqlcheckExe" -u"$user" -p"$pass" -h"$host" -P"$port" --check --force --auto-repair --databases "$db"
-	"$mysqlcheckExe" -u"$user" -p"$pass" -h"$host" -P"$port" --optimize --force --databases "$db"
+  echo "Found $mysqlcheckExe executable."
+  "$mysqlcheckExe" -u"$user" -p"$pass" -h"$host" -P"$port" --check --force --auto-repair --databases "$db"
+  "$mysqlcheckExe" -u"$user" -p"$pass" -h"$host" -P"$port" --optimize --force --databases "$db"
 else
-	echo "Could not find mysqlcheck executable."
+  echo "Could not find mysqlcheck executable."
 fi
 
 size=$(du -hs "$dest")
 who=$(whoami)
 if [ -f "$dump" ]; then
-	echo "$datetime	[success][$who]	$db; All backups: $size" >> "$log"
-	exit 0
+  echo "$datetime	[success][$who]	$db; All backups: $size" >> "$log"
+  exit 0
 else
-	echo "$datetime	[failure][$who]	$db; All backups: $size" >> "$log"
-	exit 1
+  echo "$datetime	[failure][$who]	$db; All backups: $size" >> "$log"
+  exit 1
 fi
