@@ -10,7 +10,7 @@ Features
 - [x] Usable with cron, but also manually
 - [x] Environment file support
 - [ ] Global environment variables support
-- [ ] Supports MariaDb
+- [x] Supports MariaDb
 - [x] Logging
 
 ## Installation
