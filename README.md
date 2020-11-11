@@ -15,8 +15,12 @@ Features
 ## Installation
 
 ```bash
-wget https://raw.githubusercontent.com/cakebake/EightDump/main/eightdump.sh -O eightdump && chmod +x eightdump
+mkdir -p ~/bin && \
+wget https://raw.githubusercontent.com/cakebake/EightDump/main/eightdump.sh -O ~/bin/eightdump && \
+chmod +x ~/bin/eightdump
 ```
+
+> Check if `~/bin` is in the global $PATH or add it. Example: `echo "export PATH=$PATH:$HOME/bin" >> ~/.bashrc`
 
 ## Configuration
 
@@ -36,14 +40,14 @@ BACKUP_KEEP_MINUTES=10080
 CLI
 
 ```bash
-./eightdump /path/to/.env
+eightdump /path/to/.env
 ```
 
 Cron
 
 ```cron
 # every day 04h00
-0 4 * * * /path/to/eightdump /path/to/.env >/dev/null 2>&1
+0 4 * * * /home/name/bin/eightdump /path/to/.env >/dev/null 2>&1
 # every 6h
-0 */6 * * * /path/to/eightdump /path/to/.env >/dev/null 2>&1
+0 */6 * * * /home/name/eightdump /path/to/.env >/dev/null 2>&1
 ```
