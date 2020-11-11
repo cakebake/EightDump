@@ -49,5 +49,5 @@ Cron
 # every day 04h00
 0 4 * * * /home/name/bin/eightdump /path/to/.env >/dev/null 2>&1
 # every 6h
-0 */6 * * * /home/name/eightdump /path/to/.env >/dev/null 2>&1
+0 */6 * * * /home/name/bin/eightdump /path/to/.env >/dev/null 2>&1
 ```
