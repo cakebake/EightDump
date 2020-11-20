@@ -43,9 +43,9 @@ if [ ! -z "$mysqldumpExe" ]; then
   echo "Found $mysqldumpExe executable."
   if [ -x "$(command -v gzip)" ]; then
     echo "Found gzip executable."
-    "$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" | gzip -9 > "$dump"
+    "$mysqldumpExe" --no-tablespaces -u"$user" -p"$pass" -h"$host" -P"$port" "$db" | gzip -9 > "$dump"
   else
-    "$mysqldumpExe" -u"$user" -p"$pass" -h"$host" -P"$port" "$db" > "$dump"
+    "$mysqldumpExe" --no-tablespaces -u"$user" -p"$pass" -h"$host" -P"$port" "$db" > "$dump"
   fi
 else
   echo "Could not find mysqldump executable."
