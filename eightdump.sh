@@ -28,7 +28,7 @@ dump="$dest/$db.$datetime.sql.gz"
 log="$dest/.log"
 
 mkdir -p "$dest"
-find "$dest" -type f -not -path '*/\.*' -mmin "$keep" -delete
+find "$dest" -type f -not -path '*/\.*' -mmin "+$keep" -delete
 
 if [ -x "$(command -v mysqldump)" ]; then
   mysqldumpExe=mysqldump
